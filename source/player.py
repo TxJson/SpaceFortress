@@ -1,3 +1,5 @@
+#player.py
+
 from graphics import *
 import input as k
 
@@ -12,13 +14,13 @@ class Player():
         pass
 
     def update(delta = 1.0):
-        if k.kUp():
+        if k.kUp(): #If key up is pressed
             sprite.move(0, -0.2)
-        if k.kDown():
+        if k.kDown(): #If key down is pressed
             sprite.move(0, 0.2)
-        if k.kLeft():
+        if k.kLeft(): #If key left is pressed
             sprite.move(-0.2, 0)
-        if k.kRight():
+        if k.kRight(): #If key right is pressed
             sprite.move(0.2, 0)
         pass
 
