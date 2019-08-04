@@ -5,23 +5,48 @@ import player as plr
 import uielement as ui
 import input as k
 import time
+from menu import MainMenu
+from enum import Enum
+
+class State(Enum):
+    MENU = 0
+    GAME = 1
+
+
 
 window = None #Window
 lastFrameTime = 0.0
 delta = 0.0
 aplr = None #Player
 uielement = None #UIElement
+gamestate = None
+menu = None
+
+def initGame():
+    #Initializes player
+    global aplr
+    aplr = plr.Player(Point(100, 100), window, 25, 450, color_rgb(0, 255, 0))
+    pass
+
+def initMenu(win):
+    global menu
+    menu = MainMenu(win)
+    pass
 
 #Main init function
 def init():
     #Initializes and loads the window
     global window
+    global gamestate
     window = GraphWin("Space Shooter", 1280, 720)
     window.setBackground(color_rgb(0, 0, 0))
 
-    #Initializes player
-    global aplr
-    aplr = plr.Player(Point(100, 100), window, 25, 450, color_rgb(0, 255, 0))
+    gamestate = State.MENU
+
+    if gamestate == State.GAME:
+        initGame()
+    elif gamestate == State.MENU:
+        initMenu(window)
 
     #initializes indev text
     global uielement
@@ -29,11 +54,26 @@ def init():
 
     pass
 
+def updateGame(dt, win):
+    global aplr
+    aplr.update(dt, win)
+    pass
+
+def updateMenu(dt, win):
+    global menu
+    menu.updateMouse(win)
+    pass
+
 #Main update function
 def update(dt):
     global window
-    global aplr
-    aplr.update(dt, window)
+    global gamestate
+
+    if gamestate == State.GAME:
+        updateGame(dt, window)
+    elif gamestate == State.MENU:
+        updateMenu(dt, window)
+
     window.flush()
     pass
 
