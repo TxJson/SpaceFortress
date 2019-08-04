@@ -1,34 +1,30 @@
 #ui.py
 
 from graphics import *
-import gameobject as go
 
-class UiElement(go.GameObject):
-    def __init__(self, x, y, win, spriteLoc):
-        o.Object.__init__(self, x, y, win, spriteLoc)
+class UiElement:
+    def __init__(self, pos, win, spriteLoc):
+        self.pos = pos
+        self.object = Image(self.pos, spriteLoc)
+        self.object.draw(win)
         pass
 
-    def __init__(self, x, y, win, size=18, text="TEMPLATE",
+    def __init__(self, pos, win, size=18, text="TEMPLATE",
     c = color_rgb(0,0,0), font="arial", style="normal"):
-        go.GameObject.obj = Text(Point(x, y), text)
 
-        go.GameObject.obj.setSize(size) #Sets size of text
-        go.GameObject.obj.setFace(font) #Sets font of text
-        go.GameObject.obj.setStyle(style) #Sets style of text
+        self.pos = pos
 
-        go.GameObject.obj.setFill(c) #Sets colour of text
+        self.object = Text(pos, text)
 
-        go.GameObject.obj.draw(win)
-        pass
+        self.object.setSize(size) #Sets size of text
+        self.object.setFace(font) #Sets font of text
+        self.object.setStyle(style) #Sets style of text
+        self.object.setFill(c) #Sets colour of text
 
-    #Draw function
-    def draw(self, win):
-        global obj
-        obj.draw(win)
+        self.object.draw(win)
         pass
 
     #Clear function
     def clear():
-        global obj
-        obj.undraw()
+        self.object.undraw()
         pass
