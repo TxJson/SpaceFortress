@@ -4,8 +4,11 @@ from graphics import *
 import player as plr
 import uielement as ui
 import input as k
+import time
 
 window = None #Window
+lastFrameTime = 0.0
+delta = 0.0
 aplr = None #Player
 uielement = None #UIElement
 
@@ -18,21 +21,21 @@ def init():
 
     #Initializes player
     global aplr
-    aplr = plr.Player(100, 100, window, "content/spaceship.png")
+    #aplr = plr.Player(100, 100, window, "content/spaceship.png")
+    aplr = plr.Player(Point(100, 100), window, 25, 0.3, color_rgb(0, 255, 0))
 
     #initializes indev text
     global uielement
-    uielement = ui.UiElement(60, 20, window, 18, "Dev build", color_rgb(255, 0, 0))
+    uielement = ui.UiElement(Point(60, 20), window, 18, "Dev build", color_rgb(255, 0, 0))
 
     pass
 
 #Main update function
 def update():
+    global window
     global aplr
-    aplr.update()
-
-    uielement
-
+    aplr.update(window)
+    window.flush()
     pass
 
 #Main draw function
