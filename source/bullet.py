@@ -5,57 +5,43 @@ from graphics import *
 import functions as func
 
 class Bullet:
-    #velocity = None
-    #destX = 0
-    #destY = 0
-
     def __init__(self, pos, win, r, dest, vel = 1.0, c=color_rgb(255, 255, 255)):
-        #go.__init__(self, x, y, win, r, c)
+        self.pos = pos #position
+        self.dest = Point(dest.getX() - pos.getX(), dest.getY() - pos.getY()) #destination
+        self.radius = r #radius
+        self.vel = vel #velocity
 
-        self.pos = pos
-        self.dest = dest
-        self.radius = r
-        self.vel = vel
-
-        self.object = Circle(self.pos, r)
-        self.object.setFill(c)
-        self.object.draw(win)
+        self.object = Circle(self.pos, r) #Circle
+        self.object.setFill(c) #set colour
+        self.object.draw(win) #draw
 
         self.aliveFlag = True
-
-        #global velocity
-        #velocity = vel
-
-        #global destX
-        #global destY
-
-        #destX = destinationX
-        #destY = destinationY
-
         pass
 
     def getAliveFlag(self):
         return self.aliveFlag
 
+    #remove object from screen
     def undraw(self):
         self.object.undraw()
 
-    def update(self, win):
-        #global velocity
-        #global destX
-        #global destY
-
+    def update(self, dt, win):
+        #normalize values
         dest = func.normalize(self.dest.getX(), self.dest.getY())
 
-        x = dest.getX()*self.vel
-        y = dest.getY()*self.vel
+        #calculate x and y movement
+        x = dest.getX()*self.vel*dt
+        y = dest.getY()*self.vel*dt
 
-        self.pos = Point(self.pos.getX()+x, self.pos.getY()+y)
-
+        #move object
         self.object.move(x, y)
 
+        #set position
+        self.pos = self.object.getCenter()
+
+        #Split into two if statements for readability
         if self.pos.getX() > win.getWidth() or self.pos.getY() > win.getHeight():
             self.aliveFlag = False
-
-
+        elif self.pos.getX() < 0 or self.pos.getY() < 0:
+            self.aliveFlag = False
         pass

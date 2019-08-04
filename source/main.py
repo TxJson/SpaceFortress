@@ -21,8 +21,7 @@ def init():
 
     #Initializes player
     global aplr
-    #aplr = plr.Player(100, 100, window, "content/spaceship.png")
-    aplr = plr.Player(Point(100, 100), window, 25, 0.3, color_rgb(0, 255, 0))
+    aplr = plr.Player(Point(100, 100), window, 25, 450, color_rgb(0, 255, 0))
 
     #initializes indev text
     global uielement
@@ -31,10 +30,10 @@ def init():
     pass
 
 #Main update function
-def update():
+def update(dt):
     global window
     global aplr
-    aplr.update(window)
+    aplr.update(dt, window)
     window.flush()
     pass
 
@@ -67,8 +66,15 @@ def run():
     if not window.isClosed():
         _ = True
         while _:
-            update()
+            #DeltaTime
+            currentTime = time.time()
+            delta = currentTime - lastFrameTime
+            lastFrameTime = currentTime
 
+            #Main update function
+            update(delta)
+
+            #if close key is pressed, close
             if k.kClose():
                 close()
                 _ = False
