@@ -7,73 +7,48 @@ import input as k
 from bullet import Bullet
 
 class Player:
-    #body = None
-    #obj = None
-    #velocity = None
-    #listBullets = None
-
     def __init__(self, pos, win, r, vel = 1.0, c=color_rgb(255, 255, 255)):
-        #go.__init__(self, x, y, win, r, c)
+        self.pos = pos #position
+        self.radius = r #radius
+        self.vel = vel #velocity
 
-        self.pos = pos
-        self.radius = r
-        self.vel = vel
-
-        self.object = Circle(self.pos, r)
-        self.object.setFill(c)
-        self.object.draw(win)
-        self.bullets = []
-        #global obj
-        #obj = Circle(self.pos, r)
-        #obj.setFill(c)
-        #obj = Image(Point(x, y), spriteLoc)
-        #obj.draw(win)
-        #self.y = y
-        #self.vel = vel
-
-        #global velocity
-        #velocity = vel
-
-        #global listBullets
-        #listBullets = []
+        self.object = Circle(self.pos, r) #Circle
+        self.object.setFill(c) #set colour
+        self.object.draw(win) #draw
+        self.bullets = [] #bullet list
 
         pass
 
-    def update(self, win):
-        global velocity
-        global listBullets
-        moveX = 0.0
-        moveY = 0.0
+    def update(self, dt, win):
+        x = 0.0
+        y = 0.0
         if k.kUp(): #If key up is pressed
-            moveY -= self.vel
+            y -= self.vel * dt
         if k.kDown(): #If key down is pressed
-            moveY += self.vel
+            y += self.vel * dt
         if k.kLeft(): #If key left is pressed
-            moveX -= self.vel
+            x -= self.vel * dt
         if k.kRight(): #If key right is pressed
-            moveX += self.vel
+            x += self.vel * dt
 
+        #Check if mouse has been clicked
         mouse = k.kMouseLeft(win)
-
         if mouse != None:
-            self.bullets.append(Bullet(self.pos, win, 15, Point(mouse.getX(), mouse.getY())))
+            print(mouse.getX(), mouse.getY())
+            self.bullets.append(Bullet(self.pos, win, 15, Point(mouse.getX(), mouse.getY()), 1000, 'green'))
 
-        #list = []
+        #Update bullets and check if out of bounds
         for obj in self.bullets:
-            obj.update(win)
+            obj.update(dt, win)
             if obj.getAliveFlag() != True:
                 obj.undraw()
                 self.bullets.remove(obj)
-                print("Object destroyed")
-        #for obj in list:
-        #    self.bullets.remove(obj)
-        #    print("Bullet removed")
 
-        self.object.move(moveX, moveY)
+        self.object.move(x, y)
         self.pos = self.object.getCenter()
         pass
 
-        #Clear function
+        #undraw object
         def clear():
             self.object.undraw()
             pass
