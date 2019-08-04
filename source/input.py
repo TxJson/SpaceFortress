@@ -17,3 +17,7 @@ def kLeft():
 #if key right is pressed, return true, else false
 def kRight():
     return True if kb.is_pressed('d') else False
+
+#if key is pressed, return true, else false
+def kClose():
+    return True if kb.is_pressed('esc') else False

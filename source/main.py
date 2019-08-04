@@ -2,9 +2,12 @@
 
 from graphics import *
 import player as plr
+import uielement as ui
+import input as k
 
 window = None #Window
 aplr = None #Player
+uielement = None #UIElement
 
 #Main init function
 def init():
@@ -17,19 +20,28 @@ def init():
     global aplr
     aplr = plr.Player(100, 100, window, "content/spaceship.png")
 
+    #initializes indev text
+    global uielement
+    uielement = ui.UiElement(60, 20, window, 18, "Dev build", color_rgb(255, 0, 0))
+
     pass
 
 #Main update function
 def update():
     global aplr
     aplr.update()
+
+    uielement
+
     pass
 
 #Main draw function
 def draw():
     global aplr
+    global uielement
     global window
     aplr.draw(window)
+    uielement.draw(window)
     pass
 
 #Clear the screen
@@ -37,6 +49,10 @@ def clear():
     global aplr
     aplr.clear()
     pass
+
+def close():
+    global window
+    window.close()
 
 #Main run function
 def run():
@@ -46,10 +62,13 @@ def run():
     global window
 
     if not window.isClosed():
-        while True:
+        _ = True
+        while _:
             update()
-    clear()
-    window.close()
+
+            if k.kClose():
+                close()
+                _ = False
     pass
 
 #main
