@@ -43,6 +43,8 @@ class MainMenu:
         self.buttons.append(Button(Point(180, 300), Point(310, 350), color_rgb(105, 105, 105), "Connect"))
         self.buttons.append(Button(Point(180, 380), Point(310, 430), color_rgb(105, 105, 105), "Quit"))
 
+
+
         for btn in self.buttons:
             btn.draw(win)
         pass
