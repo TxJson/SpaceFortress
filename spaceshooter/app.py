@@ -31,14 +31,14 @@ class Application:
         self.window.flush()
         self.window.close()
 
-    def clear(self):
+    def undraw(self):
         if self.gameState==GameState.MENU:
-            self.menu.clear()
+            self.menu.undraw()
         elif self.gameState==GameState.GAME:
-            self.game.clear()
+            self.game.undraw()
         else:
-            self.menu.clear()
-            self.game.clear()
+            self.menu.undraw()
+            self.game.undraw()
 
     def run(self):
         while not self.window.isClosed():
@@ -78,7 +78,7 @@ class Application:
                 print("Reverting to GameState.GAME")
                 self.setState(GameState.GAME)
             else:
-                self.clear()
+                self.undraw()
                 if state==GameState.GAME:
                     self.game.draw(self.window)
                 elif state==GameState.MENU:
