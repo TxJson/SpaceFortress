@@ -28,5 +28,5 @@ class Game:
     def draw(self, win):
         self.player.draw(win)
 
-    def clear(self):
-        self.player.clear()
+    def undraw(self):
+        self.player.undraw()

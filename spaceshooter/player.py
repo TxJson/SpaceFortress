@@ -3,8 +3,10 @@
 from graphics import color_rgb
 from graphics import Circle
 from graphics import Point
+
+from objects import Bullet
+
 import input as k
-from bullet import Bullet
 
 class Player:
     def __init__(self, pos, win, r, vel = 1.0, c=color_rgb(255, 255, 255)):
@@ -31,15 +33,15 @@ class Player:
         #Check if mouse has been clicked
         mouse = k.kMouseLeft(win)
         if mouse != None:
-            print(mouse.getX(), mouse.getY())
-            self.bullets.append(Bullet(self.pos, win, 15, Point(mouse.getX(), mouse.getY()), 1000, 'green'))
+            #print(mouse.getX(), mouse.getY())
+            self.bullets.append(Bullet(self.pos, win, 10, Point(mouse.getX(), mouse.getY()), 1000, 'green'))
 
         #Update bullets and check if out of bounds
-        for obj in self.bullets:
-            obj.update(dt, win)
-            if obj.getAliveFlag() != True:
-                obj.undraw()
-                self.bullets.remove(obj)
+        for bullet in self.bullets:
+            bullet.update(dt, win)
+            if bullet.getAliveFlag() != True:
+                bullet.undraw()
+                self.bullets.remove(bullet)
 
         self.object.move(x, y)
         self.pos = self.object.getCenter()
@@ -48,5 +50,5 @@ class Player:
         self.object.draw(win)
 
     #undraw object
-    def clear(self):
+    def undraw(self):
         self.object.undraw()

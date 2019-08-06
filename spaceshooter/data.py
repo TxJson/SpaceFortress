@@ -1,3 +1,5 @@
+#data.py
+
 from enum import Enum
 
 class GameState(Enum):

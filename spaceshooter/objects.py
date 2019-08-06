@@ -1,8 +1,14 @@
-#bullet.py
+#objects.py
+
+from graphics import Point
+from graphics import Circle
+from graphics import color_rgb
+
+import functions as func
 
 import math
-from graphics import *
-import functions as func
+
+## TODO: Turn into object class
 
 class Bullet:
     def __init__(self, pos, win, r, dest, vel = 1.0, c=color_rgb(255, 255, 255)):

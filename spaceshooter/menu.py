@@ -1,72 +1,53 @@
 #menu.py
 
-import input as k
-from graphics import *
-#import uielement as ui
-import input as k
-from enum import Enum
+from graphics import Point
+from graphics import color_rgb
 
 from data import MenuButton
 from data import GameState
 
-## TODO: Move to UI Element
-class Button:
-    def __init__(self, pos1, pos2, type=MenuButton.NONE, bc=color_rgb(255, 255, 255),
-    text="", size=18, font="arial", style="normal", txtc=color_rgb(0,0,0)):
-        self.object = Rectangle(pos1, pos2)
-        self.object.setFill(bc)
-        self.object.setOutline(color_rgb(255, 255, 255))
-        self.pos1 = pos1
-        self.pos2 = pos2
-        self.type = type
+from ui import Button
 
-        self.text = Text(self.object.getCenter(), text)
-        self.text.setSize(size)
-        self.text.setFace(font)
-        self.text.setStyle(style)
-        self.text.setFill(txtc)
-
-    def draw(self, win):
-        self.object.draw(win)
-        self.text.draw(win)
-
-    def clear(self):
-        self.object.undraw()
-        self.text.undraw()
-
+import input
 
 class MainMenu:
     def __init__(self, win):
+        self.buttonPos = Point(180, 300)
+        self.buttonDis = 20
         self.buttons = []
-        self.buttons.append(Button(Point(180, 300), Point(310, 350), MenuButton.PLAY, color_rgb(105, 105, 105), "Play"))
-        self.buttons.append(Button(Point(180, 380), Point(310, 430), MenuButton.CONNECT, color_rgb(105, 105, 105), "Connect"))
-        self.buttons.append(Button(Point(180, 460), Point(310, 510), MenuButton.QUIT, color_rgb(105, 105, 105), "Quit"))
 
+        self.buttonAdd(160, 50, MenuButton.PLAY, "Play")
+        self.buttonAdd(160, 50, MenuButton.CONNECT, "Connect")
+        self.buttonAdd(160, 50, MenuButton.QUIT, "Quit")
 
     def update(self, win):
         data = GameState.NONE
-        mouse = k.kMouseLeft(win)
+        mouse = input.kMouseLeft(win)
         if mouse != None:
             for btn in self.buttons:
-                if mouse.getX() > btn.pos1.getX() and mouse.getX() < btn.pos2.getX():
-                    if mouse.getY() > btn.pos1.getY() and mouse.getY() < btn.pos2.getY():
-                        if btn.type==MenuButton.PLAY:
+                if mouse.getX() > btn.getPos1().getX() and mouse.getX() < btn.getPos2().getX():
+                    if mouse.getY() > btn.getPos1().getY() and mouse.getY() < btn.getPos2().getY():
+                        if btn.getType()==MenuButton.PLAY:
                             print("Play")
                             data=GameState.GAME
-                        elif btn.type==MenuButton.CONNECT:
+                        elif btn.getType()==MenuButton.CONNECT:
                             print("Connect")
                             data=GameState.GAMEONLINE
-                        elif btn.type==MenuButton.QUIT:
+                        elif btn.getType()==MenuButton.QUIT:
                             print("Quit")
                             data=GameState.QUIT
                         break
         return data
 
+    def buttonAdd(self, width, height, type=MenuButton.NONE, text="", c=color_rgb(105, 105, 105)):
+        btnPos = Point(self.buttonPos.getX(), self.buttonPos.getY()+((height+self.buttonDis)*len(self.buttons)))
+        self.buttons.append(Button(btnPos, width, height, type, c, text))
+
     def draw(self, win):
         for btn in self.buttons:
             btn.draw(win)
 
-    def clear(self):
+    def undraw(self):
         #self.text.clear()
         for btn in self.buttons:
-            btn.clear()
+            btn.undraw()
