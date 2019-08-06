@@ -9,14 +9,18 @@ from objects import Bullet
 import input as k
 
 class Player:
-    def __init__(self, pos, win, r, vel = 1.0, c=color_rgb(255, 255, 255)):
+    def __init__(self, pos, r, vel = 1.0, c=color_rgb(255, 255, 255)):
         self.pos = pos #position
         self.radius = r #radius
         self.vel = vel #velocity
+        self.colour = c
 
         self.object = Circle(self.pos, r)
         self.object.setFill(c)
+        self.object.setOutline('black')
         self.bullets = [] #bullet list
+
+        print(self.object.getRadius())
 
     def update(self, dt, win):
         x = 0.0
@@ -33,8 +37,8 @@ class Player:
         #Check if mouse has been clicked
         mouse = k.kMouseLeft(win)
         if mouse != None:
-            #print(mouse.getX(), mouse.getY())
-            self.bullets.append(Bullet(self.pos, win, 10, Point(mouse.getX(), mouse.getY()), 1000, 'green'))
+            #print(mouse)
+            self.bullets.append(Bullet(self.pos, win, 10, Point(mouse.getX(), mouse.getY()), 1000, self.colour))
 
         #Update bullets and check if out of bounds
         for bullet in self.bullets:
@@ -45,6 +49,12 @@ class Player:
 
         self.object.move(x, y)
         self.pos = self.object.getCenter()
+
+    def getBullets(self):
+        return self.bullets
+
+    def getObject(self):
+        return self.object
 
     def draw(self, win):
         self.object.draw(win)

@@ -13,14 +13,14 @@ import time
 import input
 
 class Application:
-    def __init__(self, title = "", sWidth=1280, sHeight=720, bgC=color_rgb(0, 0, 0)):
+    def __init__(self, title = "", sWidth=1280, sHeight=720, bgC=color_rgb(25, 25, 25)):
         self.window = GraphWin(title, sWidth, sHeight)
         self.window.setBackground(bgC)
 
         self.gameState = GameState.MENU
 
         self.menu = MainMenu(self.window)
-        self.game = Game(self.window)
+        self.game = Game(self.window, False)
 
         self.dt = 0.0 #DeltaTime
         self.lastFrameTime = 0.0
