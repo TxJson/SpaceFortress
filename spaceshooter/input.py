@@ -22,6 +22,9 @@ def kRight():
 def kClose():
     return True if kb.is_pressed('esc') else False
 
+def kReturn():
+    return True if kb.is_pressed('z') else False
+
 def kMouseLeft(win):
     v = win.checkMouse()
     if v != None:

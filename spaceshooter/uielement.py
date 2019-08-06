@@ -1,4 +1,7 @@
-#ui.py
+#uielement.py
+
+
+## TODO: Remake UI Element
 
 from graphics import *
 
@@ -7,7 +10,6 @@ class UiElement:
         self.pos = pos
         self.object = Image(self.pos, spriteLoc)
         self.object.draw(win)
-        pass
 
     def __init__(self, pos, win, size=18, text="TEMPLATE",
     c = color_rgb(0,0,0), font="arial", style="normal"):
@@ -22,9 +24,7 @@ class UiElement:
         self.object.setFill(c) #Sets colour of text
 
         self.object.draw(win)
-        pass
 
     #Clear function
-    def clear():
+    def clear(self):
         self.object.undraw()
-        pass

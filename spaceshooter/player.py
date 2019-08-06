@@ -12,12 +12,9 @@ class Player:
         self.radius = r #radius
         self.vel = vel #velocity
 
-        self.object = Circle(self.pos, r) #Circle
-        self.object.setFill(c) #set colour
-        self.object.draw(win) #draw
+        self.object = Circle(self.pos, r)
+        self.object.setFill(c)
         self.bullets = [] #bullet list
-
-        pass
 
     def update(self, dt, win):
         x = 0.0
@@ -46,9 +43,10 @@ class Player:
 
         self.object.move(x, y)
         self.pos = self.object.getCenter()
-        pass
 
-        #undraw object
-        def clear():
-            self.object.undraw()
-            pass
+    def draw(self, win):
+        self.object.draw(win)
+
+    #undraw object
+    def clear(self):
+        self.object.undraw()
