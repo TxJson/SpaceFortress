@@ -20,7 +20,16 @@ class Player:
         self.object.setOutline('black')
         self.bullets = [] #bullet list
 
+        self.score = 0
+
         print(self.object.getRadius())
+
+    def modifyScore(self, value):
+        self.score += value
+        #print("Score:"+str(self.score))
+
+    def getScore(self):
+        return self.score
 
     def update(self, dt, win):
         x = 0.0
@@ -55,6 +64,12 @@ class Player:
 
     def getObject(self):
         return self.object
+
+    def getRadius(self):
+        return self.object.getRadius()
+
+    def getPos(self):
+        return self.pos
 
     def draw(self, win):
         self.object.draw(win)

@@ -20,10 +20,18 @@ def kRight():
 
 #if key is pressed, return true, else false
 def kClose():
-    return True if kb.is_pressed('esc') else False
+    if kb.is_pressed('esc'):
+        if kb.is_pressed('q'):
+            return True
+
+    return False
 
 def kReturn():
-    return True if kb.is_pressed('z') else False
+    if kb.is_pressed('esc'):
+        if kb.is_pressed('e'):
+            return True
+
+    return False
 
 def kMouseLeft(win):
     v = win.checkMouse()

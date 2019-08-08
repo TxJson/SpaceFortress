@@ -3,8 +3,9 @@
 from graphics import Point
 from graphics import color_rgb
 
-from player import Player
 from objects import Asteroid
+from ui import Text
+from player import Player
 from data import GameState
 from random import randrange
 
@@ -14,9 +15,11 @@ import input
 
 class Game:
     def __init__(self, win, online):
-        self.player = Player(Point(100, 100), 25, 450, color_rgb(255, 120, 90))
+        self.player = Player(Point(win.getWidth()/2, win.getHeight()/2), 25, 450, color_rgb(255, 120, 90))
         self.online = online #For peer-to-peer gameplay
         self.asteroidCounter = 0
+
+        self.scoreui = Text(Point(100, 100), str(self.player.getScore()), 25, color_rgb(255, 145, 164), "bold")
 
         if not online:
             self.asteroids = []
@@ -27,8 +30,9 @@ class Game:
         self.player.update(dt, win)
 
         if input.kReturn():
-            print("Return to menu")
+            print("Returned to menu")
             data = GameState.MENU
+            self.undraw()
 
 
         #Asteroids
@@ -46,7 +50,11 @@ class Game:
                     obj.setAliveFlag(False)
                     obj.undraw()
                     bullet.undraw()
+
                     self.player.getBullets().remove(bullet)
+
+                    self.player.modifyScore(7)
+                    self.scoreui.setText(self.player.getScore())
                     break
 
             if obj.getOutOfBounds():
@@ -55,7 +63,6 @@ class Game:
             elif not obj.getAliveFlag():
                 self.calcAsteroid(win, obj)
                 self.asteroids.remove(obj)
-
 
         return data
 
@@ -74,6 +81,12 @@ class Game:
 
     def draw(self, win):
         self.player.draw(win)
+        self.scoreui.draw(win)
 
     def undraw(self):
         self.player.undraw()
+        self.scoreui.undraw()
+        for obj in self.asteroids:
+            obj.undraw()
+
+        self.asteroids = []
