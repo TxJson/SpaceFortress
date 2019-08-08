@@ -5,6 +5,8 @@ from graphics import Text as TextObject
 from graphics import color_rgb
 from graphics import Point
 
+from functions import normalize as norm
+
 class Text:
     def __init__(self, pos, text="TEMPLATE", size=18, c=color_rgb(0,0,0), style="normal", font="arial"):
         self.pos = pos
@@ -26,6 +28,9 @@ class Text:
     def undraw(self):
         self.object.undraw()
 
+    def setText(self, text):
+        self.text=text
+        self.object.setText(text)
 
 class Button:
     def __init__(self, pos, width, height, type=None, bc=color_rgb(255, 255, 255),
