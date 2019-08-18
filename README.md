@@ -1,8 +1,6 @@
 # Spaceshooter
 
-# Spaceshooter
-
-A simple project to prepare for the University by getting familiar with the python programming language.
+A simple project to prepare for University by getting familiar with the python programming language.
 
 ## Cloning
 If you are too clone this project, here is the simple commands.
