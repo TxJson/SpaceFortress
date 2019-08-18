@@ -1,11 +1,11 @@
-# Spaceshooter
+# SpaceFortress
 
 A simple project to prepare for University by getting familiar with the python programming language.
 
 ## Cloning
 If you are too clone this project, here is the simple commands.
 ```
-git clone https://github.com/TxJson/Spaceshooter [Location]
+git clone https://github.com/TxJson/SpaceFortress [Location]
 git submodule update --init --recursive
 ```
 
