@@ -9,6 +9,9 @@ git clone https://github.com/TxJson/SpaceFortress [Location]
 git submodule update --init --recursive
 ```
 
+## Demo
+![SpaceFortress as of Aug 8th 2019](demo/demo.gif)
+
 ## Dependencies:
 - [Python 3.7.4](https://www.python.org/downloads/release/python-374/)
 - [Zelle Graphics Library](https://mcsp.wartburg.edu/zelle/python/graphics/graphics.pdf)
