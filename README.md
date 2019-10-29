@@ -1,6 +1,6 @@
 # SpaceFortress
 
-A simple project to prepare for University by getting familiar with the python programming language.
+A simple spaceshooter game made by using python 3.7.4 and the Zelle Graphics library.
 
 ## Demo
 ![SpaceFortress as of Aug 8th 2019](demo/demo.gif)
@@ -9,7 +9,6 @@ A simple project to prepare for University by getting familiar with the python p
 If you are too clone this project, here is the simple commands.
 ```
 git clone https://github.com/TxJson/SpaceFortress [Location]
-git submodule update --init --recursive
 ```
 
 ## Dependencies:
